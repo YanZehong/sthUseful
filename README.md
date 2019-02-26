@@ -263,6 +263,17 @@ PAC模式就是访问国内网站会走国内IP，访问被封的网站走服务
 例如 https://github.com/YanZehong 等等包含github.com的URL都会走服务器IP
 
 
+### 重新部署时的问题
+
+WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+
+ssh会把你每个你访问过计算机的公钥(public key)都记录在~/.ssh/known_hosts。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告， 避免你受到DNS Hijack之类的攻击。我在上面列出的情况，就是这种情况。系统使用同一ip，登录过一次后就会把ssh信息记录在本地的~/.ssh/known_hsots文件中，切换该系统后再用ssh访问这台主机就会出现冲突警告，需要手动删除修改known_hsots里面的内容。
+
+**解决办法**
+
+`rm -rf ~/.ssh/known_hosts
+
+
 # End
 
 如果觉得有帮助就给我个star或者fork一下吧🌹😘，thx！
